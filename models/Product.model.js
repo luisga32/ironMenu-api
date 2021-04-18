@@ -12,7 +12,20 @@ const productSchema = new Schema(
             type: String
         },
         image: {
-            type: String
+            type: String,
+            required: 'Image is required',
+//            validate: {
+//              validator: value => {
+//                try {
+//                  const url = new URL(value)
+//      
+//                  return url.protocol === 'http:' || url.protocol === 'https:'
+//                } catch(err) {
+//                  return false
+//                }
+//              },
+//              message: () => 'Invalid image URL'
+//            }
 
         },
         price: {
@@ -24,11 +37,13 @@ const productSchema = new Schema(
         }
     },
     {
+        timestamps: true,
         toJSON: {
             virtuals: true,
             transform : (doc,ret) => {
                 ret.id= doc._id
                 delete ret._id
+                delete ret.__v
                 return ret
             }
         }
