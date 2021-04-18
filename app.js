@@ -28,22 +28,22 @@ app.use(express.json()); // for parsear and use req.body as json
 app.use(logger('dev')); // for view logs of requests 
 
 //Routes
-//const routes = require('./config/routes.config');
-//app.use('/api', routes)
+const routes = require('./config/routes.config');
+app.use('/api', routes)
 
 // Handle errors
 
 app.use((req,res, next) => {
 
    // always log the error
-  console.log('There was an error on the server!')
-  console.error('ERROR', req.method, req.path, err);
+  console.log('There was an error on the server!',req.method,req.path)
   next(createError(404, 'Route not found'));
 });
 
 app.use((error, req,res, next)=> {
+  console.log('Error: ', error)
   if (error instanceof mongoose.Error.ValidationError) error = createError(400, error)
-  else if (error instanceof mongoose.Error.CastError) error = createError(404, 'Reosurce not found')
+  else if (error instanceof mongoose.Error.CastError) error = createError(404, 'Resource not found')
   else if (error.message.includes('E11000')) error = createError(404, 'Already exists')
   else if (!error.status) error = createError(500, error)
 

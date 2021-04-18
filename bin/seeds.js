@@ -16,7 +16,7 @@ mongoose.connection.once('open', () => {
                 productsLoad.push({
                     title: products[i].title,
                     ingredients: products[i].ingredients,
-                    image: faker.image.food,
+                    image: faker.image.food(),
                     price: products[i].price,
                     course: products[i].course
                 })

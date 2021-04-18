@@ -14,25 +14,25 @@ const productSchema = new Schema(
         image: {
             type: String,
             required: 'Image is required',
-//            validate: {
-//              validator: value => {
-//                try {
-//                  const url = new URL(value)
-//      
-//                  return url.protocol === 'http:' || url.protocol === 'https:'
-//                } catch(err) {
-//                  return false
-//                }
-//              },
-//              message: () => 'Invalid image URL'
-//            }
+            validate: {
+              validator: value => {
+                try {
+                  const url = new URL(value)
+      
+                  return url.protocol === 'http:' || url.protocol === 'https:'
+                } catch(err) {
+                  return false
+                }
+              },
+              message: () => 'Invalid image URL'
+            }
 
         },
         price: {
             type: Number
         },
         course: {
-            type: [String],
+            type: String,
             enum: course
         }
     },

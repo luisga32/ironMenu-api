@@ -3,10 +3,10 @@ const Product = require('../models/Product.model');
 
 module.exports.list = (req, res, next) => {
 
-    const { order } = req.query;
-    const query = {};
-    if (order) {
-        query = { order: order }
+    const { course } = req.query;
+    let query = {};
+    if (course) {
+        query = { course: course }
 
     };
 
