@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const course = require('../constans/course')
-//require('../constans/constans');
+//const course = require('../constans/course')
+const constants = require('../constans/constans');
 
 const productSchema = new Schema(
     {
@@ -34,7 +34,7 @@ const productSchema = new Schema(
         },
         course: {
             type: String,
-            enum: course
+            enum: constants.course
         }
     },
     {

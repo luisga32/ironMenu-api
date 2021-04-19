@@ -2,7 +2,28 @@ const mongoose =require('mongoose');
 const Schema = mongoose.Schema;
 require('../constans/constans');
 require('./User.model');
-require('./productOrder.model')
+require('./Product.model');
+
+const ProductOrderSchema = new Schema({
+
+    productId: {
+        type:mongoose.Types.ObjectId,
+        required:'Id product needs to be referenced',
+        ref:'Product'
+    },
+    price: {
+        type: Number,
+        default: 0
+    }, 
+    quantity:{
+        type: Number,
+        default:0
+    }
+
+}
+
+);
+
 
 const orderSchema = new Schema (
 
@@ -27,13 +48,13 @@ const orderSchema = new Schema (
             type: Number,
             default: 0
         },
-        date: { 
-            type: Date, 
-            default: Date.now 
-        },
         address: {
             type:String,
             required:'An address is required'
+        },
+        produtsOrder: {
+            type: [ProductOrderSchema],
+            default:undefined
         }
     },
     {
