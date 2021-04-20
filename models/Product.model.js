@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-//const course = require('../constans/course')
 const constants = require('../constans/constans');
 
 const productSchema = new Schema(

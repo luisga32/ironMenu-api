@@ -11,7 +11,14 @@ module.exports.list = (req, res, next) => {
     };
 
     Product.find(query)
-    .then (products => res.json(products))
+    .then (products => {
+        if (products) {
+            res.json(products)
+        } else {
+            next(404,'Meals not found')
+        }
+        
+    })
     .catch(next)
 
 }

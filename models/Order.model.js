@@ -1,11 +1,15 @@
 const mongoose =require('mongoose');
 const Schema = mongoose.Schema;
-require('../constans/constans');
+const constants = require('../constans/constans');
 require('./User.model');
 require('./Product.model');
 
 const ProductOrderSchema = new Schema({
 
+    course: {
+        type: String,
+        enum: constants.course
+    },
     productId: {
         type:mongoose.Types.ObjectId,
         required:'Id product needs to be referenced',
@@ -19,6 +23,7 @@ const ProductOrderSchema = new Schema({
         type: Number,
         default:0
     }
+
 
 }
 
