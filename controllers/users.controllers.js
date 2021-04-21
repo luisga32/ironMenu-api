@@ -18,6 +18,20 @@ module.exports.create = (req,res,next) => {
     .catch(next)
 }
 
+//  User get
+
+module.exports.get = (req,res,next) => {
+    User.findById(req.currentUser)
+    .then((user) => {
+        if (!user) {
+            next(createError(404, 'User not Found'));
+        } else {
+            return res.status(200).json(user);
+        };
+    })
+    .catch(next);
+};
+
 
 // User authentication
 module.exports.authenticate = (req,res,next) => {
@@ -35,7 +49,7 @@ module.exports.authenticate = (req,res,next) => {
                     // Generate JWT token 
                     res.json({
                         access_token: jwt.sign(
-                            {   id:user_id   }, //payload
+                            {   id:user._id   }, //payload
                             process.env.JWT_SECRET || 'Changeme', // secret
                             {
                                 expiresIn:'1d'           //options

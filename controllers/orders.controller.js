@@ -6,15 +6,23 @@ const Order = require('../models/Order.model');
 module.exports.create = (req,res,next) => {
     Order.create(req.body)
     .then((order) => res.status(201).json(order))
+    .catch(next)
 };
 
 module.exports.get = (req,res,next) => {
     Order.findById(req.params.id)
+    .populate({
+        path: 'productsOrder',
+        populate: {
+            path: 'productId',
+            ref:'Product',
+        },
+    })
     .then ((order)=> {
         if (order) {
-            res.json(order)
+            res.status(200).json(order)
         } else {
-            next(404,'Order not found')
+            next(createError(404, {errors: {orders : 'Order not found'} }))  
         } 
 
     })
@@ -23,7 +31,12 @@ module.exports.get = (req,res,next) => {
 
 module.exports.list = (req,res,next) => {
     Order.find( {userId : req.body.userId})
-    then( (orders) => {
-        res.status(201).json(orders)
+    .then((orders) => {
+        if (orders.length){
+            res.status(200).json(orders)
+        } else {
+            next(createError(404, {errors: {orders : 'There is not any order'} }))   
+        }
     })
-}
+    .catch(next)
+};

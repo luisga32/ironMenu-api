@@ -23,10 +23,7 @@ const ProductOrderSchema = new Schema({
         type: Number,
         default:0
     }
-
-
 }
-
 );
 
 
@@ -41,13 +38,13 @@ const orderSchema = new Schema (
         typeMenu: {
             type: String,
             required:true,
-            enum: typeMenu
+            enum: constants.typeMenu
         },
         state: {
             type: String,
             required:true,
             default: 'confirmed',
-            enum: stateMenu
+            enum: constants.stateMenu
         },
         price: {
             type: Number,
@@ -57,7 +54,7 @@ const orderSchema = new Schema (
             type:String,
             required:'An address is required'
         },
-        produtsOrder: {
+        productsOrder: {
             type: [ProductOrderSchema],
             default:undefined
         }
@@ -78,11 +75,6 @@ const orderSchema = new Schema (
 
 )
 
-orderSchema.virtual("productsOrder",{
-    ref:"ProductOrder",
-    foreingnField:"orderId",
-    localField: "_id"
-});
 
 const Order = mongoose.model('Order',orderSchema);
 module.exports = Order; 
