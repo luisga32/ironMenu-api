@@ -2,12 +2,14 @@ const router =require('express').Router();
 const productsController = require('../controllers/products.controller');
 const ordersController = require('../controllers/orders.controller');
 const usersController = require('../controllers/users.controllers');
+const authMiddleware = require('../middlewares/auth.middleware');
+
 
 
 //users routes
 router.post('/users',usersController.create);
 router.post('/login',usersController.authenticate);
-router.get('/users/me',usersController.get);
+router.get('/users/me',authMiddleware.isAuthoricated,usersController.get);
 
 //products routes
 router.get('/products',productsController.list);

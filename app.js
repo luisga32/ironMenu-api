@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const logger = require('morgan'); // logs
 const createError = require('http-errors'); // Library to create errors
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
 
@@ -44,6 +45,7 @@ app.use((error, req,res, next)=> {
   console.log('Error: ', error)
   if (error instanceof mongoose.Error.ValidationError) error = createError(400, error)
   else if (error instanceof mongoose.Error.CastError) error = createError(404, 'Resource not found')
+  else if (jwt.JsonWebTokenError) error = createError(401, error)
   else if (error.message.includes('E11000')) error = createError(404, 'Already exists')
   else if (!error.status) error = createError(500, error)
 
