@@ -27,6 +27,7 @@ app.use(express.static('public'));
 
 app.use(express.json()); // for parsear and use req.body as json
 app.use(logger('dev')); // for view logs of requests 
+app.use(cors()) // allows requests from others domains or ports
 
 //Routes
 const routes = require('./config/routes.config');
