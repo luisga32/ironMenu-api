@@ -12,14 +12,14 @@ router.post('/login',usersController.authenticate);
 router.get('/users/me',authMiddleware.isAuthoricated,usersController.get);
 
 //products routes
-router.get('/products',productsController.list);
 router.get('/products/:id',productsController.get);
+router.get('/products',productsController.list);
 
 //orders routes
 
 router.post('/orders',ordersController.create);
-router.get('/users/me/orders',ordersController.list);
 router.get('/users/me/orders/:id',ordersController.get);
+router.get('/users/me/orders',ordersController.list);
 
 
 
