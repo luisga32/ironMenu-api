@@ -15,6 +15,8 @@ router.get('/users/me',authMiddleware.isAuthoricated,usersController.get);
 router.get('/products/:id',productsController.get);
 router.get('/products',productsController.list);
 
+
+
 //orders routes
 
 router.post('/orders',ordersController.create);
