@@ -30,7 +30,14 @@ module.exports.get = (req,res,next) => {
 };
 
 module.exports.list = (req,res,next) => {
-    Order.find( {userId : req.body.userId})
+    Order.find( {userId : req.currentUser})
+    .populate({
+        path: 'productsOrder',
+        populate: {
+            path: 'productId',
+            ref:'Product',
+        },
+    })
     .then((orders) => {
         if (orders.length){
             res.status(200).json(orders)
