@@ -39,12 +39,12 @@ module.exports.authenticate = (req,res,next) => {
     User.findOne({email: email})
     .then(user =>{
         if (!user) {
-            next(createError(404, {errors: { email : 'Email or password are not valid'}}))
+            next(createError(404, {errors: { email : 'Email o contraseña no es correcta'}}))
         } else {
             return user.checkPassword(password)
             .then(match =>{
                 if (!match) {
-                    next(createError(404, {errors: { email : 'Email or password are not valid'}}))       
+                    next(createError(404, {errors: { email : 'Email o contraseña no es correcta'}}))       
                 } else {
                     // Generate JWT token 
                     res.json({

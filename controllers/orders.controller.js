@@ -22,7 +22,7 @@ module.exports.get = (req,res,next) => {
         if (order) {
             res.status(200).json(order)
         } else {
-            next(createError(404, {errors: {orders : 'Order not found'} }))  
+            next(createError(404, {errors: {orders : 'Pedido no encontrado'} }))  
         } 
 
     })
@@ -42,7 +42,7 @@ module.exports.list = (req,res,next) => {
         if (orders.length){
             res.status(200).json(orders)
         } else {
-            next(createError(404, {errors: {orders : 'There is not any order'} }))   
+            next(createError(404, {errors: {orders : 'No se ha realizado ningun pedido'} }))   
         }
     })
     .catch(next)

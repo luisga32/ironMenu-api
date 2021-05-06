@@ -15,7 +15,7 @@ module.exports.list = (req, res, next) => {
         if (products) {
             res.json(products)
         } else {
-            next(createError(404, {errors: {products : 'Dishes not found'} }))  
+            next(createError(404, {errors: {products : 'Productos no encontrados'} }))  
         }
         
     })
@@ -29,7 +29,7 @@ module.exports.get = (req, res, next) => {
         if (product) {
             res.json(product)
         } else {
-            next(createError(404, {errors: {products : 'Dish not found'} }))  
+            next(createError(404, {errors: {products : 'Producto no encontrado'} }))  
         } 
 
     })

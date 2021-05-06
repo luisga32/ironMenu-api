@@ -44,6 +44,7 @@ app.use((req,res, next) => {
 
 app.use((error, req,res, next)=> {
   console.log('Error: ', error)
+  console.log ('Error errors', error.errors)
   if (error instanceof mongoose.Error.ValidationError) error = createError(400, error)
   else if (error instanceof mongoose.Error.CastError) error = createError(404, 'Resource not found')
   else if (jwt.JsonWebTokenError) error = createError(401, error)
@@ -62,7 +63,7 @@ app.use((error, req,res, next)=> {
     Object.keys(error.errors)
       .reduce((errors, key) => ({ ...errors, [key]: error.errors[key].message || error.errors[key] }), {}) :
     undefined;
-
+  console.log('Data errors', data)
   res.status(error.status).json(data)
  })
 
